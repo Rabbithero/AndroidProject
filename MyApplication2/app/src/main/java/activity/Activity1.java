@@ -67,7 +67,6 @@ public class Activity1 extends Fragment {
         temperature1 = (TextView) view1.findViewById(R.id.temperature1);
         dressing_advice= (TextView) view1.findViewById(R.id.dressing_advice);
         wind1 = (TextView) view1.findViewById(R.id.wind1);
-
         bt_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
