@@ -3,9 +3,9 @@ package activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import demo.R;
+import dialog.CustomProgressDialog;
 import model.FutureModel;
 import model.GatherModel;
 import model.GoodModel;
@@ -37,7 +38,7 @@ import okhttp3.Response;
  * Created by 1305235 on 2017/3/21.
  */
 
-public class Activity1 extends Fragment {
+public class Activity1 extends LazyFragment {
     private Button bt_post;
     private OkHttpClient mOkHttpClient;
     private EditText et_text;
@@ -54,6 +55,8 @@ public class Activity1 extends Fragment {
     private TextView temperature1;
     private TextView wind1;
     private TextView dressing_advice;
+    private CustomProgressDialog dialog;
+    private boolean isPrepared=true;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,7 +70,9 @@ public class Activity1 extends Fragment {
         temperature1 = (TextView) view1.findViewById(R.id.temperature1);
         dressing_advice= (TextView) view1.findViewById(R.id.dressing_advice);
         wind1 = (TextView) view1.findViewById(R.id.wind1);
+//        lazyLoad();
         bt_post.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (et_text.getText().toString().equals("")){
@@ -78,27 +83,36 @@ public class Activity1 extends Fragment {
 
             }
         });
-        if (goodmodel!=null){
-
-            set();
-
-        }
+//        if (goodmodel!=null){
+//
+//            set();
+//
+//        }
 //        post("杭州");
 
         return view1;
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-            if (getUserVisibleHint()){
-
-            }else {
-
+    protected void lazyLoad() {
+        if(isPrepared==true || !isFirst) {
+            isPrepared=false;
+            post("杭州");
+            return;
+        }else {
+            if (goodmodel!=null){
+                set();
             }
+
+        }
+
+
     }
 
     private void post(String name) {
+        dialog =new CustomProgressDialog(mContext,R.drawable.farme,R.style.dialog_theme);
+        dialog.setCanceledOnTouchOutside(false);//点击外部消失
+        dialog.show();
         mOkHttpClient = new OkHttpClient();
         RequestBody formBody = new FormBody.Builder()
                 .add("cityname", name)
@@ -115,6 +129,7 @@ public class Activity1 extends Fragment {
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+
                 goodmodel = JSON.parseObject(response.body().string(), GoodModel.class);
                 if (goodmodel != null) {
 
@@ -126,6 +141,18 @@ public class Activity1 extends Fragment {
 //                        for (int i = 0; i < goodmodel.getResult().getFuture().size(); i++) {
 //                            futureModels.add(goodmodel.getResult().getFuture().get(i));
 //                        }
+                        final Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                dialog.dismiss();
+                            }
+                        });
+                        thread.start();
                         Collections.reverse(goodmodel.getResult().getFuture());
                         for (int i=0 ;i<goodmodel.getResult().getFuture().size();i++){
                                 if (goodmodel.getResult().getFuture().get(i).getWeek().equals(goodmodel.getResult().getToday().getWeek()))
@@ -153,6 +180,7 @@ public class Activity1 extends Fragment {
         mAdapter = new MyAdapter(goodmodel.getResult().getFuture());
         re_view.setAdapter(mAdapter);
         re_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, true));
+
     }
 
 

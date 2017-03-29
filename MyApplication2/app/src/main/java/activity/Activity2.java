@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import demo.R;
 
+
 /**
  * Created by 1305235 on 2017/3/21.
  */
@@ -17,7 +18,7 @@ public class Activity2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=View.inflate(getContext(),R.layout.fragement2,null);
+        View view=View.inflate(getContext(), R.layout.fragement2,null);
         return view;
     }
     //        @Override
