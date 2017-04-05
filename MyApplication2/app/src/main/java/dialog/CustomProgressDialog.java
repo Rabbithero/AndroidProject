@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 
 import activity.Activity1;
-import demo.R;
+import demo.myapplication.R;
 
 
 import static android.R.attr.color;

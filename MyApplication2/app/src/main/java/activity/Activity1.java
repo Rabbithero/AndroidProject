@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import demo.R;
+import demo.myapplication.R;
 import dialog.CustomProgressDialog;
 import model.FutureModel;
 import model.GatherModel;
@@ -33,6 +33,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import post.PostResult;
 
 /**
  * Created by 1305235 on 2017/3/21.
@@ -77,6 +78,7 @@ public class Activity1 extends LazyFragment {
             public void onClick(View v) {
                 if (et_text.getText().toString().equals("")){
                         Toast.makeText(getActivity(),"城市不能为空",Toast.LENGTH_LONG).show();
+
                 }else {
                     post(et_text.getText().toString());
                 }
@@ -112,6 +114,7 @@ public class Activity1 extends LazyFragment {
     private void post(String name) {
         dialog =new CustomProgressDialog(mContext,R.drawable.farme,R.style.dialog_theme);
         dialog.setCanceledOnTouchOutside(false);//点击外部消失
+        dialog.setCancelable(false);//返回键不消失
         dialog.show();
         mOkHttpClient = new OkHttpClient();
         RequestBody formBody = new FormBody.Builder()

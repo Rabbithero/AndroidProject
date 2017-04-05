@@ -23,3 +23,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+#jpush极光推送
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }

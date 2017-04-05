@@ -21,7 +21,7 @@ import activity.Activity1;
 import activity.Activity2;
 import activity.activity3;
 import activity.activity4;
-import demo.R;
+
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
