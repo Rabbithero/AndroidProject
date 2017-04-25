@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by 1305235 on 2017/3/27.
  */
@@ -26,6 +28,7 @@ public abstract class LazyFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         onVisible();
+        ButterKnife.bind(getActivity());
     }
 
     @Nullable

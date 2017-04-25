@@ -5,6 +5,7 @@ import android.app.Application;
 import java.util.HashSet;
 import java.util.Set;
 
+import butterknife.ButterKnife;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -20,5 +21,6 @@ public class MyLocating extends Application{
         Set<String> set = new HashSet<>();
         set.add("小黄人");
         JPushInterface.setTags(this,set,null);
+
     }
 }

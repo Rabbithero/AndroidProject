@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import demo.myapplication.R;
 import dialog.CustomProgressDialog;
 import model.FutureModel;
@@ -39,7 +42,7 @@ import post.PostResult;
  * Created by 1305235 on 2017/3/21.
  */
 
-public class Activity1 extends LazyFragment {
+public class Activity1 extends LazyFragment implements View.OnClickListener{
     private Button bt_post;
     private OkHttpClient mOkHttpClient;
     private EditText et_text;
@@ -64,6 +67,7 @@ public class Activity1 extends LazyFragment {
         View view1 = View.inflate(getContext(), R.layout.fragement1, null);
         bt_post = (Button) view1.findViewById(R.id.bt_post);
         et_text = (EditText) view1.findViewById(R.id.et_text);
+//        ButterKnife.bind(getActivity());注册一下
         re_view = (RecyclerView) view1.findViewById(R.id.re_view);
         week1 = (TextView) view1.findViewById(R.id.week1);
         data1 = (TextView) view1.findViewById(R.id.data1);
@@ -128,7 +132,13 @@ public class Activity1 extends LazyFragment {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                dialog.dismiss();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(),"链接超时",Toast.LENGTH_LONG).show();
+                    }
+                });
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
@@ -191,6 +201,11 @@ public class Activity1 extends LazyFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+    @OnClick
+    @Override
+    public void onClick(View v) {
+
+    }
 
     /*public final void runOnUiThread(Runnable action) {
         if (Thread.currentThread() != mUiThread) {
@@ -232,6 +247,7 @@ public class Activity1 extends LazyFragment {
     }
 
     class NewViewHolder extends RecyclerView.ViewHolder {
+
         private TextView week;
         private TextView data;
         private TextView weather;

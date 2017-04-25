@@ -1,8 +1,14 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+
+    }
     defaultConfig {
         applicationId "demo.myapplication"
         minSdkVersion 15
@@ -19,6 +25,7 @@ android {
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -47,4 +54,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'cn.jiguang.sdk:jpush:3.0.1'
     compile 'cn.jiguang.sdk:jcore:1.1.0'
+    compile 'com.roughike:bottom-bar:2.0.2'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }

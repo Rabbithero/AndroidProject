@@ -3,8 +3,8 @@ package demo.myapplication;
 
 import android.app.LocalActivityManager;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,6 +14,9 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,75 +24,52 @@ import activity.Activity1;
 import activity.Activity2;
 import activity.activity3;
 import activity.activity4;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button book;
-    private Button movies;
+public class MainActivity extends AppCompatActivity implements OnTabSelectListener {
+    private BottomBar bb_navigation;
     private ViewPager view_page;
-    private MainAdapter adapter;
-     List<Fragment> mlistview= new ArrayList<>();
-    private LocalActivityManager manager;
     private SparseArray<Fragment> mSparseArray;
-    private Button home;
-    private Button sttring;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         view_page = (ViewPager) findViewById(R.id.view_page);
-        book = (Button) findViewById(R.id.book);
-        movies = (Button) findViewById(R.id.movies);
-        home= (Button) findViewById(R.id.home);
-         sttring = (Button) findViewById(R.id.sttring);
-        book.setOnClickListener(this);
-        movies.setOnClickListener(this);
-        home.setOnClickListener(this);
-        sttring.setOnClickListener(this);
-        Activity1 view1 = new Activity1();
-        Activity2 view2 = new Activity2();
-        activity3 view3 = new activity3();
-        activity4 view4 = new activity4();
-        mlistview.add(view1);
-        mlistview.add(view2);
-        mlistview.add(view3);
-        mlistview.add(view4);
-        view_page.setCurrentItem(0);
-        view_page.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        bb_navigation= (BottomBar) findViewById(R.id.bb_navigation);
+        bb_navigation.setOnTabSelectListener(this);
+
+        mSparseArray = new SparseArray<>();
+        mSparseArray.put(0, Fragment.instantiate(this, Activity1.class.getName()));
+        mSparseArray.put(1, Fragment.instantiate(this, Activity2.class.getName()));
+        mSparseArray.put(2, Fragment.instantiate(this, activity3.class.getName()));
+        mSparseArray.put(3, Fragment.instantiate(this, activity4.class.getName()));
+        view_page.setOffscreenPageLimit(4);
+        view_page.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return mSparseArray.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return mSparseArray.size();
+            }
+        });
+
+        view_page.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                switch (position){
-                    case 0:
-                        home.setTextColor(Color.parseColor("#00A0D7"));
-                        book.setTextColor(Color.parseColor("#000000"));
-                        movies.setTextColor(Color.parseColor("#000000"));
-                        sttring.setTextColor(Color.parseColor("#000000"));
-                        break;
-                    case 1:
-                        home.setTextColor(Color.parseColor("#000000"));
-                        book.setTextColor(Color.parseColor("#00A0D7"));
-                        movies.setTextColor(Color.parseColor("#000000"));
-                        sttring.setTextColor(Color.parseColor("#000000"));
-                        break;
-                    case 2:
-                        home.setTextColor(Color.parseColor("#000000"));
-                        book.setTextColor(Color.parseColor("#000000"));
-                        movies.setTextColor(Color.parseColor("#00A0D7"));
-                        sttring.setTextColor(Color.parseColor("#000000"));
-                        break;
-                    case 3:
-                        home.setTextColor(Color.parseColor("#000000"));
-                        book.setTextColor(Color.parseColor("#000000"));
-                        movies.setTextColor(Color.parseColor("#000000"));
-                        sttring.setTextColor(Color.parseColor("#00A0D7"));
-                        break;
-                }
+
             }
 
             @Override
             public void onPageSelected(int position) {
-
+                bb_navigation.setDefaultTabPosition(position);
             }
 
             @Override
@@ -97,57 +77,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-        adapter=new MainAdapter(getSupportFragmentManager());
-        view_page.setAdapter(adapter);
+
         view_page.requestLayout();
     }
 
-    private View getView(String qualityActivity1, Intent intent) {
-        return manager.startActivity(qualityActivity1, intent).getDecorView();
-    }
 
     @Override
-    public void onClick(View v) {
-        home.setTextColor(Color.parseColor("#000000"));
-        book.setTextColor(Color.parseColor("#000000"));
-        movies.setTextColor(Color.parseColor("#000000"));
-        sttring.setTextColor(Color.parseColor("#000000"));
-        switch (v.getId()){
+    public void onTabSelected(@IdRes int tabId) {
+        switch (tabId) {
             case R.id.book:
-                view_page.setCurrentItem(1);
-                book.setTextColor(Color.parseColor("#00A0D7"));
+                view_page.setCurrentItem(1,false);
                 break;
             case R.id.movies:
-                view_page.setCurrentItem(2);
-                movies.setTextColor(Color.parseColor("#00A0D7"));
+                view_page.setCurrentItem(2,false);
                 break;
             case R.id.sttring:
-                view_page.setCurrentItem(3);
-                sttring.setTextColor(Color.parseColor("#00A0D7"));
+                view_page.setCurrentItem(3,false);
                 break;
             case R.id.home:
-                view_page.setCurrentItem(0);
-                home.setTextColor(Color.parseColor("#00A0D7"));
+                view_page.setCurrentItem(0, false);
                 break;
-        }
-    }
-
-    class MainAdapter extends FragmentPagerAdapter {
-
-
-        public MainAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-
-        @Override
-        public Fragment getItem(int position) {
-            return  mlistview.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mlistview.size();
         }
     }
 }

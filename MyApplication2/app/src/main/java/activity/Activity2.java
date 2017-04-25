@@ -14,12 +14,23 @@ import demo.myapplication.R;
  * Created by 1305235 on 2017/3/21.
  */
 
-public class Activity2 extends Fragment {
+public class Activity2 extends LazyFragment {
+    private boolean isPrepared=true;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=View.inflate(getContext(), R.layout.fragement2,null);
         return view;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if (isPrepared==true||!isFirst){
+            isPrepared=false;
+            return;
+        }else {
+
+        }
     }
     //        @Override
 //    public LayoutInflater getLayoutInflater(Bundle savedInstanceState) {
@@ -44,4 +55,5 @@ public class Activity2 extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
 }

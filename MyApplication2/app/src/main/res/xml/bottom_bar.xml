@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@drawable/tab_items_nol"
+        id="@+id/home"
+        title="首页"/>
+    <tab
+        icon="@drawable/tab_search_nol"
+        id="@+id/book"
+        title="小说"/>
+    <tab
+        icon="@drawable/tab_synchronization_nol"
+        id="@+id/movies"
+        title="视频"/>
+    <tab
+        icon="@drawable/tab_more_nol"
+        id="@+id/sttring"
+        title="个人中心"/>
+</tabs>
