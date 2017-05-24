@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import demo.twoproject.R;
+
 public class MainActivity extends AppCompatActivity {
     ArrayList<String> arrayList_groupData;
     ArrayList<ArrayList<String>> arrayList_memberData;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         }
         adapter=new ExAdapter(this);
         expandableListView.setAdapter(adapter);
+        expandableListView.setGroupIndicator(null);//除去自带的箭头，自带的箭头在父列表的最左边，不展开向下，展开向上
         expandableListView.setDivider(null);//这个是设定每个Group之间的分割线。,默认有分割线，设置null没有分割线
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
