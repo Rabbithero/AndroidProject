@@ -9,5 +9,10 @@
         android:background="#00A0D7"
         android:textColor="#ffffff"
         android:textSize="20dp"
-        android:text="小说"/>
+        android:text="地图"/>
+    <Button
+        android:id="@+id/bt_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="地图"/>
 </LinearLayout>

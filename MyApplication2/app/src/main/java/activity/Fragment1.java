@@ -1,12 +1,16 @@
 package activity;
 
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -42,7 +46,7 @@ import post.PostResult;
  * Created by 1305235 on 2017/3/21.
  */
 
-public class Activity1 extends LazyFragment implements View.OnClickListener{
+public class Fragment1 extends LazyFragment implements View.OnClickListener{
     private Button bt_post;
     private OkHttpClient mOkHttpClient;
     private EditText et_text;
@@ -60,6 +64,8 @@ public class Activity1 extends LazyFragment implements View.OnClickListener{
     private TextView wind1;
     private TextView dressing_advice;
     private CustomProgressDialog dialog;
+    private String[] ss={"sa","ss"};
+    private String dd="ssdadd";
     private boolean isPrepared=true;
     @Nullable
     @Override
@@ -89,12 +95,6 @@ public class Activity1 extends LazyFragment implements View.OnClickListener{
 
             }
         });
-//        if (goodmodel!=null){
-//
-//            set();
-//
-//        }
-//        post("杭州");
 
         return view1;
     }
@@ -103,7 +103,7 @@ public class Activity1 extends LazyFragment implements View.OnClickListener{
     protected void lazyLoad() {
         if(isPrepared==true || !isFirst) {
             isPrepared=false;
-            post("杭州");
+//            post("杭州");
             return;
         }else {
             if (goodmodel!=null){
@@ -114,7 +114,6 @@ public class Activity1 extends LazyFragment implements View.OnClickListener{
 
 
     }
-
     private void post(String name) {
         dialog =new CustomProgressDialog(mContext,R.drawable.farme,R.style.dialog_theme);
         dialog.setCanceledOnTouchOutside(false);//点击外部消失
@@ -159,6 +158,8 @@ public class Activity1 extends LazyFragment implements View.OnClickListener{
                             public void run() {
                                 try {
                                     Thread.sleep(1000);
+                                    Looper.prepare();
+
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -200,6 +201,7 @@ public class Activity1 extends LazyFragment implements View.OnClickListener{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
     }
     @OnClick
     @Override

@@ -27,8 +27,9 @@ public abstract class LazyFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        onVisible();
         ButterKnife.bind(getActivity());
+        onVisible();
+
     }
 
     @Nullable

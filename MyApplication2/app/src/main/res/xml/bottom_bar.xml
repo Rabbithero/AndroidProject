@@ -7,7 +7,7 @@
     <tab
         icon="@drawable/tab_search_nol"
         id="@+id/book"
-        title="小说"/>
+        title="地图"/>
     <tab
         icon="@drawable/tab_synchronization_nol"
         id="@+id/movies"

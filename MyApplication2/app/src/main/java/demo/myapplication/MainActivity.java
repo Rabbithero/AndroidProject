@@ -1,30 +1,22 @@
 package demo.myapplication;
 
 
-import android.app.LocalActivityManager;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
-import android.view.View;
-import android.widget.Button;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import activity.Activity1;
-import activity.Activity2;
-import activity.activity3;
-import activity.activity4;
-import butterknife.BindView;
+import activity.Fragment1;
+import activity.Fragment2;
+import activity.Fragment3;
+import activity.Fragment4;
 import butterknife.ButterKnife;
 
 
@@ -42,12 +34,12 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
         view_page = (ViewPager) findViewById(R.id.view_page);
         bb_navigation= (BottomBar) findViewById(R.id.bb_navigation);
         bb_navigation.setOnTabSelectListener(this);
-
+        Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
         mSparseArray = new SparseArray<>();
-        mSparseArray.put(0, Fragment.instantiate(this, Activity1.class.getName()));
-        mSparseArray.put(1, Fragment.instantiate(this, Activity2.class.getName()));
-        mSparseArray.put(2, Fragment.instantiate(this, activity3.class.getName()));
-        mSparseArray.put(3, Fragment.instantiate(this, activity4.class.getName()));
+        mSparseArray.put(0, Fragment.instantiate(this, Fragment1.class.getName()));
+        mSparseArray.put(1, Fragment.instantiate(this, Fragment2.class.getName()));
+        mSparseArray.put(2, Fragment.instantiate(this, Fragment3.class.getName()));
+        mSparseArray.put(3, Fragment.instantiate(this, Fragment4.class.getName()));
         view_page.setOffscreenPageLimit(4);
         view_page.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override

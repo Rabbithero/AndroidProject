@@ -4,19 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-
-import activity.Activity1;
 import demo.myapplication.R;
-
-
-import static android.R.attr.color;
-import static android.R.attr.id;
 
 /**
  * Created by 1305235 on 2017/3/27.
