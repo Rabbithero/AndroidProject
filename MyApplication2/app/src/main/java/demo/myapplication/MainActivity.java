@@ -1,6 +1,8 @@
 package demo.myapplication;
 
 
+import android.app.Service;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.IdRes;
@@ -18,6 +20,7 @@ import activity.Fragment2;
 import activity.Fragment3;
 import activity.Fragment4;
 import butterknife.ButterKnife;
+import setvice.MyService;
 
 
 public class MainActivity extends AppCompatActivity implements OnTabSelectListener {
@@ -91,5 +94,6 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
                 break;
         }
     }
+
 }
 

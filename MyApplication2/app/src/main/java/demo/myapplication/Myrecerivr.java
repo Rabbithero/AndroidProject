@@ -63,7 +63,7 @@ public class Myrecerivr  extends BroadcastReceiver{
 //    }
 //
 
-    //send msg to MainActivity
+    //send msg to MapActivity
     private void processCustomMessage(Context context, Bundle bundle) {
         //省略了
     }

@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import demo.myapplication.MainActivity;
 import demo.myapplication.R;
+import setvice.MyService;
 
 
 /**
@@ -18,17 +20,27 @@ import demo.myapplication.R;
 
 public class Fragment2 extends LazyFragment{
     private boolean isPrepared=true;
-    private Button mBt_map;
+    private Button bt_baidumapmap;
+    private MyService mMyService;
+    private Button mBt_gaodemap;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=View.inflate(getContext(), R.layout.fragement2,null);
-        mBt_map = (Button) view.findViewById(R.id.bt_map);
-        mBt_map.setOnClickListener(new View.OnClickListener() {
+        mBt_gaodemap = (Button) view.findViewById(R.id.bt_gaodemap);
+        mBt_gaodemap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),MyMapActivity.class);
+                Intent intent = new Intent(getActivity(),GaoDeMapActivity.class);
+                startActivity(intent);
+            }
+        });
+        bt_baidumapmap = (Button) view.findViewById(R.id.bt_baidumapmap);
+        bt_baidumapmap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),MapActivity.class);
                 startActivity(intent);
             }
         });

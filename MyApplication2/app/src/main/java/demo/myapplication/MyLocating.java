@@ -26,6 +26,5 @@ public class MyLocating extends Application{
         Set<String> set = new HashSet<>();
         set.add("小黄人");
         JPushInterface.setTags(this,set,null);
-//        locationService = new LocationService(getApplicationContext());
     }
 }

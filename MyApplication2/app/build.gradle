@@ -19,6 +19,7 @@ android {
         ndk {
             abiFilters "armeabi", "armeabi_v7a", 'armeabi-v8a', "x86"
         }
+//        极光推送
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "5ee01224aca122472ac3d495", //JPush上注册的包名对应的appkey（*换成你的*）
@@ -42,7 +43,6 @@ android {
 }
 
 dependencies {
-    compile files('libs/BaiduLBS_AndroidSDK_Lib/libs/BaiduLBS_Android.jar')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -58,6 +58,24 @@ dependencies {
     compile 'com.roughike:bottom-bar:2.0.2'
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/locSDK_3.1.jar')
+    compile files('libs/locSDK_5.0.jar')
+    compile files('libs/AMap3DMap_5.2.0_AMapSearch_5.1.0_AMapLocation_3.4.0_20170602.jar')
+    compile files('libs/AMap2DMap_2.9.0_AMapSearch_3.4.0_AMapLocation_2.8.0_20160811.jar')
+    compile files('libs/ShareSDK-Core-3.0.0.jar')
+    compile files('libs/ShareSDK-Wechat-Moments-3.0.0.jar')
+    compile files('libs/ShareSDK-Wechat-Favorite-3.0.0.jar')
+    compile files('libs/ShareSDK-Wechat-Core-3.0.0.jar')
+    compile files('libs/ShareSDK-Wechat-3.0.0.jar')
+    compile files('libs/ShareSDK-Twitter-3.0.0.jar')
+    compile files('libs/MobCommons-2017.0608.1618.jar')
+    compile files('libs/ShareSDK-TencentWeibo-3.0.0.jar')
+    compile files('libs/ShareSDK-SinaWeibo-3.0.0.jar')
+    compile files('libs/ShareSDK-ShortMessage-3.0.0.jar')
+    compile files('libs/ShareSDK-QZone-3.0.0.jar')
+    compile files('libs/ShareSDK-QQ-3.0.0.jar')
+    compile files('libs/ShareSDK-Facebook-3.0.0.jar')
+    compile files('libs/ShareSDK-Email-3.0.0.jar')
+    compile files('libs/ShareSDK-Core-3.0.0.jar')
+    compile files('libs/MobTools-2017.0608.1618.jar')
 }
