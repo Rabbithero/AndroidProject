@@ -1,8 +1,7 @@
 package demo.myapplication;
 
 
-import android.app.Service;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.IdRes;
@@ -20,7 +19,7 @@ import activity.Fragment2;
 import activity.Fragment3;
 import activity.Fragment4;
 import butterknife.ButterKnife;
-import setvice.MyService;
+import setvice.MyServer;
 
 
 public class MainActivity extends AppCompatActivity implements OnTabSelectListener {
@@ -72,7 +71,8 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
 
             }
         });
-
+        Intent intent = new Intent(MainActivity.this, MyServer.class);
+        startService(intent);
         view_page.requestLayout();
     }
 

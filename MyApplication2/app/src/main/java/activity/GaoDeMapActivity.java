@@ -95,7 +95,7 @@ public class GaoDeMapActivity extends AppCompatActivity implements LocationSourc
         location();
     }
 
-    private void location() {
+    public void location() {
         //初始化定位
         mLocationClient = new AMapLocationClient(getApplicationContext());
         //设置定位回调监听

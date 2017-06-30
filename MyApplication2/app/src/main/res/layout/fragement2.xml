@@ -9,12 +9,12 @@
         android:background="#00A0D7"
         android:textColor="#ffffff"
         android:textSize="20dp"
-        android:text="地图"/>
+        android:text="工具"/>
     <Button
         android:id="@+id/bt_baidumapmap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="百度地图"/>
+        android:text="分享"/>
     <Button
         android:id="@+id/bt_gaodemap"
         android:layout_width="wrap_content"
